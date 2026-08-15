@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#fff7ea" />
+  <meta name="description" content="興味がわかない課題を、始められる形に変換する子ども向け行動起動アプリ" />
+  <title>TASK SWITCH</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">START SMALL. SWITCH FAST.</p>
+        <h1>TASK SWITCH</h1>
+      </div>
+      <button id="modeBtn" class="mode-btn" aria-label="親モードへ切り替え">👦 子ども</button>
+    </header>
+
+    <main>
+      <section id="childView" class="view active" aria-label="子ども画面">
+        <div class="hero-card">
+          <div>
+            <p class="mini">きょうのエネルギー</p>
+            <div class="energy-row" role="group" aria-label="エネルギー選択">
+              <button class="energy-chip" data-energy="low">😵 つかれた</button>
+              <button class="energy-chip active" data-energy="mid">🙂 ふつう</button>
+              <button class="energy-chip" data-energy="high">🔥 げんき</button>
+            </div>
+          </div>
+          <div class="xp-ring" aria-label="現在のXP">
+            <span id="xpValue">0</span>
+            <small>XP</small>
+          </div>
+        </div>
+
+        <div class="section-title-row">
+          <div>
+            <p class="kicker">TODAY</p>
+            <h2>きょうのミッション</h2>
+          </div>
+          <button id="addTaskBtn" class="icon-btn" aria-label="ミッションを追加">＋</button>
+        </div>
+
+        <div id="taskList" class="task-list"></div>
+
+        <section class="rescue-card" aria-labelledby="rescueTitle">
+          <div class="rescue-copy">
+            <p class="kicker">RESCUE</p>
+            <h2 id="rescueTitle">何もやりたくない？</h2>
+            <p>予定表は見なくてOK。いま動ける「最初の10秒」だけ決めよう。</p>
+          </div>
+          <button id="zeroBtn" class="zero-btn">😑 やる気ゼロ</button>
+        </section>
+
+        <section class="treasure-card">
+          <div>
+            <p class="kicker">TREASURE</p>
+            <h2>宝箱まで <span id="treasureRemain">30</span> XP</h2>
+            <div class="progress"><span id="treasureBar"></span></div>
+          </div>
+          <div class="treasure-icon" id="treasureIcon">🎁</div>
+        </section>
+      </section>
+
+      <section id="parentView" class="view" aria-label="親画面">
+        <div class="section-title-row parent-head">
+          <div>
+            <p class="kicker">PARENT DASHBOARD</p>
+            <h2>この子の「動ける条件」</h2>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <article class="stat-card"><strong id="startRate">—</strong><span>着手成功率</span></article>
+          <article class="stat-card"><strong id="switchRate">—</strong><span>SWITCH率</span></article>
+          <article class="stat-card"><strong id="avgStart">—</strong><span>平均着手時間</span></article>
+        </div>
+
+        <section class="parent-card">
+          <p class="kicker">BEST STRATEGIES</p>
+          <h3>うまくいった作戦</h3>
+          <div id="strategyStats" class="strategy-stats"></div>
+        </section>
+
+        <section class="parent-card">
+          <p class="kicker">TODAY LOG</p>
+          <h3>今日のログ</h3>
+          <div id="eventLog" class="event-log"></div>
+        </section>
+
+        <section class="parent-card settings-card">
+          <p class="kicker">PROFILE</p>
+          <h3>興味・反応タイプ</h3>
+          <div class="interest-grid" id="interestGrid">
+            <label><input type="checkbox" value="game">🎮 ゲーム</label>
+            <label><input type="checkbox" value="collect">💎 集める</label>
+            <label><input type="checkbox" value="race">⏱️ 競争</label>
+            <label><input type="checkbox" value="choice">🧭 自分で選ぶ</label>
+            <label><input type="checkbox" value="together">🤝 一緒にやる</label>
+            <label><input type="checkbox" value="praise">🌟 ほめられる</label>
+          </div>
+          <button id="resetBtn" class="secondary-btn">データをリセット</button>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-sheet" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" data-close aria-label="閉じる">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <template id="taskTemplate">
+    <article class="task-card">
+      <button class="task-main">
+        <span class="task-emoji">📘</span>
+        <span class="task-copy">
+          <strong class="task-title"></strong>
+          <small class="task-meta"></small>
+        </span>
+        <span class="task-chevron">›</span>
+      </button>
+      <div class="task-actions">
+        <button class="start-btn">START</button>
+        <button class="switch-btn">⚡ SWITCH</button>
+        <button class="done-btn" aria-label="完了">✓</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="app-core.js"></script>
+  <script src="app-actions.js"></script>
+  <script src="app-ui.js"></script>
+</body>
+</html>
