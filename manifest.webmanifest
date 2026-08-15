@@ -1,11 +1,11 @@
 {
-  "name": "TASK SWITCH",
+  "name": "TASK SWITCH - Garage Quest",
   "short_name": "TASK SWITCH",
-  "description": "興味がわかない課題を、始められる形に変換する子ども向け行動起動アプリ",
+  "description": "興味がわかない課題を、始められる形に変換し、XPでスーパーカーを集める子ども向け行動起動アプリ",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#fff7ea",
-  "theme_color": "#fff7ea",
+  "background_color": "#070b12",
+  "theme_color": "#070b12",
   "icons": [
     {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png"},
     {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png"}
